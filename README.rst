@@ -1,7 +1,5 @@
-Flaskon
-=======
-
-*Pronounced: fla-kon*
+Flakon
+======
 
 
 Flask extension for building JSON web services.
