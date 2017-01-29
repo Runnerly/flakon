@@ -31,8 +31,9 @@ def create_app(name=__name__, blueprints=None, settings=None):
 
     # load configuration
     settings = os.environ.get('FLASK_SETTINGS', settings)
-    app.config_file = Config(settings)
-    app.config.update(app.config_file.get_map('flask'))
+    if settings is not None:
+        app.config_file = Config(settings)
+        app.config.update(app.config_file.get_map('flask'))
 
     # set error handling in JSON
     for code in abort.mapping:
