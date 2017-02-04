@@ -5,7 +5,7 @@ from konfig import Config
 from flakon.blueprints import SwaggerBlueprint, JsonBlueprint   # NOQA
 
 
-def create_app(name=__name__, blueprints=None, settings=None, openapi=None):
+def create_app(name=__name__, blueprints=None, settings=None):
     app = Flask(name)
 
     # load configuration
@@ -18,9 +18,5 @@ def create_app(name=__name__, blueprints=None, settings=None, openapi=None):
     if blueprints is not None:
         for bp in blueprints:
             app.register_blueprint(bp)
-
-    # register openapi
-    if openapi is not None:
-        app.register_blueprint(SwaggerBlueprint(openapi))
 
     return app
