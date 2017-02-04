@@ -1,9 +1,9 @@
 import os
 import mimetypes
 import json
+import urllib.request
+
 import yaml
-# replace requests by httplib
-import requests
 from werkzeug.exceptions import HTTPException
 from flask import jsonify, abort
 
@@ -29,9 +29,11 @@ def get_content(url):
             data = f.read()
             return _decoder(mime)(data)
     else:
-        resp = requests.get(url)
-        content_type = resp.header.get('Content-Type', 'application/json')
-    return _decoder(content_type)(requests.get(url).content)
+        with urllib.request.urlopen(url) as resp:
+            data = resp.read()
+        content_type = resp.getheader('Content-Type', 'application/json')
+
+    return _decoder(content_type)(data)
 
 
 def error_handling(error):
