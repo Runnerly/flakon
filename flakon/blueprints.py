@@ -1,4 +1,5 @@
-from flask import jsonify, abort, Blueprint
+from flask import jsonify, Blueprint
+from werkzeug.exceptions import default_exceptions
 from swagger_parser import SwaggerParser
 from flakon.util import get_content, error_handling
 
@@ -13,7 +14,7 @@ class JsonBlueprint(Blueprint):
                                             url_prefix, subdomain,
                                             url_defaults, root_path)
         # set error handling in JSON
-        for code in abort.mapping:
+        for code in default_exceptions.keys():
             self.register_error_handler(code, error_handling)
 
     def register(self, app, options, first_registration=False):
