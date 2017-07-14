@@ -4,6 +4,11 @@ Flakon
 
 Flask helper for building JSON web services.
 
+Installation::
+
+    $ pip install flakon
+
+
 Features so far:
 
 - a JsonBlueprint: like a Blueprint but everything is jsonified
