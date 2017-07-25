@@ -67,7 +67,10 @@ class SwaggerBlueprint(JsonBlueprint):
             if "methods" in options:
                 raise ValueError("You can't pass the methods")
             op = self.ops[operation_id]
-            self.add_url_rule(op['path'], endpoint, f,
+            # XXX use regex
+            path = op['path'].replace('{', '<')
+            path = path.replace('}', '>')
+            self.add_url_rule(path, endpoint, f,
                               methods=[op['method']], **options)
             return f
         return decorator
